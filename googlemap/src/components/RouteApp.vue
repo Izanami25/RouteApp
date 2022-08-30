@@ -3,14 +3,15 @@
     <button @click="putMarker">Put marker</button>
     <button @click="drawRoute">Draw route</button>
     <button @click="clearRoute">Clear route</button>
-    <p>1 point: {{home}}</p>
-    <p>2 point: {{work}}</p>
+    <p>1 point: {{firstpoint}}</p>
+    <p>2 point: {{secondpoint}}</p>
+    <p>3 point: {{thirdpoint}}</p>
     <GmapMap
   :center="center"
   :zoom="10"
   map-type-id="terrain"
   style="width: 1500px; height: 700px"
->
+  >
   <GmapMarker
     :key="index"
     v-for="(m, index) in markers"
@@ -25,8 +26,12 @@
 </template>
 
 <script>
-const home = { lat: 51.158015, lng: 71.501615 };
-const work = { lat: 51.131121, lng: 71.383009 };
+
+
+const firstpoint = {lat: 51.134067, lng: 71.450172};
+const secondpoint = {lat: 51.131121, lng: 71.383009};
+const thirdpoint = {lat:51.099679, lng:71.424706}
+
 export default {
   name: 'RouteApp',
 
@@ -34,10 +39,11 @@ export default {
   data() {
     return {
       markers: [],
-      center: home,
+      center: firstpoint,
       paths: [],
-      home: home,
-      work: work,
+      firstpoint: firstpoint,
+      secondpoint: secondpoint,
+      thirdpoint: thirdpoint,
     };
   },
 
@@ -46,15 +52,18 @@ export default {
     putMarker() {
       this.markers = [
         {
-          position: home,
+          position: firstpoint,
         },
         {
-          position: work,
+          position: secondpoint,
         },
+        {
+          position: thirdpoint,
+        }
       ];
     },
     drawRoute() {
-      this.paths = [home, work];
+      this.paths = [firstpoint, secondpoint, thirdpoint];
     },
     clearRoute() {
       this.paths = [],
@@ -64,6 +73,12 @@ export default {
   },
 };
 </script>
+
+
+
+
+
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
